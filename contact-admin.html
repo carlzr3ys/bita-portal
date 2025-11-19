@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITA - Contact Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">BITA</a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="alumni.html" class="nav-link">Alumni</a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link">BITA Members</a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html" class="nav-link">Modules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn-register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
+            <h1 class="page-title">Contact Admin</h1>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">
+                If your matric card scan failed or your card is damaged, please fill out this form 
+                to request manual verification.
+            </p>
+
+            <div class="form-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="matric">Matric Number</label>
+                        <input type="text" id="matric" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address (Optional)</label>
+                        <input type="email" id="email" placeholder="your.name@student.utem.edu.my">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" required placeholder="Please describe the issue with your matric card or registration..."></textarea>
+                    </div>
+
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> Your request has been submitted successfully! 
+                        An admin will contact you shortly.
+                    </div>
+
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button type="submit" class="btn btn-primary btn-large" style="display: inline-block !important; padding: 1rem 2.5rem !important; border: none !important; border-radius: 5px !important; color: #2563eb !important; text-decoration: none !important; font-weight: 600 !important; background-color: white !important; opacity: 1 !important; visibility: visible !important; cursor: pointer !important; line-height: normal !important; font-size: 1.1rem !important;">Submit Request</button>
+                        <a href="register.html" class="btn btn-secondary" style="margin-left: 1rem !important; display: inline-block !important; padding: 0.75rem 2rem !important; border: 2px solid #2563eb !important; border-width: 2px !important; border-style: solid !important; border-color: #2563eb !important; border-radius: 5px !important; color: #2563eb !important; text-decoration: none !important; font-weight: 600 !important; background-color: transparent !important; opacity: 1 !important; visibility: visible !important; cursor: pointer !important; line-height: normal !important;">Back to Registration</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BITA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Require authentication for this page
+        document.addEventListener('DOMContentLoaded', async () => {
+            const auth = await requireAuth();
+            if (!auth) return; // Redirect will happen in requireAuth
+        });
+    </script>
+    <script src="contact-admin.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITA - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Remove protected navigation items immediately (before page render)
+        (function() {
+            function removeProtectedNav() {
+                const navMenu = document.getElementById('navMenu');
+                if (navMenu) {
+                    const protected = ['alumni.html', 'members.html', 'modules.html', 'contact-admin.html'];
+                    protected.forEach(href => {
+                        const link = navMenu.querySelector('a[href="' + href + '"]');
+                        if (link) {
+                            const item = link.closest('.nav-item');
+                            if (item) item.remove(); // Remove completely from DOM
+                        }
+                    });
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', removeProtectedNav);
+            } else {
+                removeProtectedNav();
+            }
+        })();
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">BITA</a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="alumni.html" class="nav-link">Alumni</a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link">BITA Members</a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html" class="nav-link">Modules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn-register">Register</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
+            <h1 class="page-title">Login to BITA</h1>
+
+            <div class="form-container">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="your.name@student.utem.edu.my" required>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                        <div class="error-message" id="passwordError"></div>
+                    </div>
+
+                    <div class="error-message" id="loginError" style="display: none;"></div>
+
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button type="submit" class="btn btn-primary btn-large">Login</button>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <p style="color: var(--text-light);">
+                            Don't have an account? <a href="register.html" style="color: var(--primary-color);">Register here</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BITA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
+

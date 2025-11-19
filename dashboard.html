@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITA - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">BITA</a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="alumni.html" class="nav-link">Alumni</a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link">BITA Members</a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html" class="nav-link">Modules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link btn-register" id="logoutBtn">Logout</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
+            <h1 class="page-title">Dashboard</h1>
+            
+            <div class="form-container">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1rem;">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h2 id="welcomeName">Welcome!</h2>
+                </div>
+
+                <div class="confirmation-card">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Your Information</h3>
+                    <div class="confirmation-item">
+                        <label>Name:</label>
+                        <span id="dashboardName">-</span>
+                    </div>
+                    <div class="confirmation-item">
+                        <label>Matric Number:</label>
+                        <span id="dashboardMatric">-</span>
+                    </div>
+                    <div class="confirmation-item">
+                        <label>Email:</label>
+                        <span id="dashboardEmail">-</span>
+                    </div>
+                    <div class="confirmation-item">
+                        <label>Program:</label>
+                        <span id="dashboardProgram">-</span>
+                    </div>
+                    <div class="confirmation-item">
+                        <label>Status:</label>
+                        <span style="color: var(--success-color); font-weight: 600;">Verified</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <a href="modules.html" class="btn btn-primary btn-large">Explore Modules</a>
+                    <a href="members.html" class="btn btn-secondary" style="margin-left: 1rem;">View Members</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BITA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
+

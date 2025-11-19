@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITA - Modules</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">BITA</a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="alumni.html" class="nav-link">Alumni</a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link">BITA Members</a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html" class="nav-link active">Modules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn-register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
+            <h1 class="page-title">Cloud Computing Modules</h1>
+            
+            <div class="modules-container">
+                <!-- Sidebar -->
+                <div class="modules-sidebar" id="modulesSidebar">
+                    <h3>Topics</h3>
+                    <ul>
+                        <li><a href="#fundamentals" class="module-link active">Cloud Computing Fundamentals</a></li>
+                        <li><a href="#services" class="module-link">Cloud Services</a></li>
+                        <li><a href="#linux" class="module-link">Linux Basics</a></li>
+                        <li><a href="#networking" class="module-link">Networking</a></li>
+                        <li><a href="#devops" class="module-link">DevOps</a></li>
+                    </ul>
+                </div>
+
+                <!-- Content -->
+                <div class="modules-content">
+                    <!-- Fundamentals -->
+                    <div id="fundamentals" class="module-section">
+                        <h2>Cloud Computing Fundamentals</h2>
+                        <p>Cloud computing is the delivery of computing services including servers, storage, databases, networking, software, analytics, and intelligence over the Internet ("the cloud") to offer faster innovation, flexible resources, and economies of scale.</p>
+                        
+                        <h3>Key Concepts</h3>
+                        <ul>
+                            <li><strong>On-Demand Self-Service:</strong> Users can provision computing capabilities automatically without human interaction.</li>
+                            <li><strong>Broad Network Access:</strong> Services are available over the network via standard mechanisms.</li>
+                            <li><strong>Resource Pooling:</strong> Provider's computing resources serve multiple consumers using a multi-tenant model.</li>
+                            <li><strong>Rapid Elasticity:</strong> Capabilities can be elastically provisioned and released to scale with demand.</li>
+                            <li><strong>Measured Service:</strong> Cloud systems automatically control and optimize resource use through metering capabilities.</li>
+                        </ul>
+
+                        <h3>Service Models</h3>
+                        <div class="code-block">
+                            <code>
+IaaS (Infrastructure as a Service)
+├── Virtual machines
+├── Storage
+└── Networking
+
+PaaS (Platform as a Service)
+├── Development tools
+├── Database management
+└── Application hosting
+
+SaaS (Software as a Service)
+├── Email services
+├── CRM systems
+└── Web applications
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Services -->
+                    <div id="services" class="module-section" style="display: none;">
+                        <h2>Cloud Services</h2>
+                        <p>Major cloud providers offer a wide range of services to meet different business needs.</p>
+                        
+                        <h3>AWS Services</h3>
+                        <ul>
+                            <li><strong>EC2:</strong> Elastic Compute Cloud for virtual servers</li>
+                            <li><strong>S3:</strong> Simple Storage Service for object storage</li>
+                            <li><strong>RDS:</strong> Relational Database Service</li>
+                            <li><strong>Lambda:</strong> Serverless compute service</li>
+                        </ul>
+
+                        <h3>Azure Services</h3>
+                        <ul>
+                            <li><strong>Virtual Machines:</strong> Scalable compute resources</li>
+                            <li><strong>Blob Storage:</strong> Object storage solution</li>
+                            <li><strong>SQL Database:</strong> Managed database service</li>
+                            <li><strong>Functions:</strong> Serverless compute</li>
+                        </ul>
+
+                        <h3>Example: Creating an S3 Bucket</h3>
+                        <div class="code-block">
+                            <code>
+# Using AWS CLI
+aws s3 mb s3://my-bita-bucket
+
+# Upload a file
+aws s3 cp file.txt s3://my-bita-bucket/
+
+# List bucket contents
+aws s3 ls s3://my-bita-bucket/
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Linux -->
+                    <div id="linux" class="module-section" style="display: none;">
+                        <h2>Linux Basics</h2>
+                        <p>Linux is an open-source operating system widely used in cloud computing environments.</p>
+                        
+                        <h3>Essential Commands</h3>
+                        <div class="code-block">
+                            <code>
+# Navigation
+cd /path/to/directory    # Change directory
+pwd                      # Print working directory
+ls -la                   # List files with details
+
+# File Operations
+mkdir directory_name     # Create directory
+touch file.txt          # Create file
+cp source dest          # Copy file
+mv old new              # Move/rename file
+rm file.txt             # Remove file
+
+# System Information
+whoami                  # Current user
+uname -a                # System information
+df -h                   # Disk usage
+free -h                 # Memory usage
+                            </code>
+                        </div>
+
+                        <h3>File Permissions</h3>
+                        <p>Linux uses a permission system with three types: read (r), write (w), and execute (x).</p>
+                        <div class="code-block">
+                            <code>
+# Change permissions
+chmod 755 script.sh     # rwxr-xr-x
+chmod +x script.sh      # Add execute permission
+
+# Change ownership
+chown user:group file.txt
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Networking -->
+                    <div id="networking" class="module-section" style="display: none;">
+                        <h2>Networking</h2>
+                        <p>Understanding networking is crucial for cloud computing and DevOps.</p>
+                        
+                        <h3>Basic Network Concepts</h3>
+                        <ul>
+                            <li><strong>IP Address:</strong> Unique identifier for devices on a network</li>
+                            <li><strong>Subnet:</strong> Logical subdivision of an IP network</li>
+                            <li><strong>Port:</strong> Communication endpoint</li>
+                            <li><strong>DNS:</strong> Domain Name System translates domain names to IP addresses</li>
+                        </ul>
+
+                        <h3>Common Network Commands</h3>
+                        <div class="code-block">
+                            <code>
+# Check network configuration
+ifconfig                # Network interface configuration
+ip addr                 # Modern alternative to ifconfig
+
+# Test connectivity
+ping google.com         # Test connection
+curl https://api.example.com  # HTTP request
+
+# Network troubleshooting
+netstat -tulpn          # Network connections
+traceroute google.com   # Trace route to destination
+                            </code>
+                        </div>
+
+                        <h3>Firewall Rules</h3>
+                        <div class="code-block">
+                            <code>
+# UFW (Ubuntu Firewall)
+sudo ufw allow 22/tcp   # Allow SSH
+sudo ufw allow 80/tcp   # Allow HTTP
+sudo ufw enable         # Enable firewall
+
+# Check status
+sudo ufw status
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- DevOps -->
+                    <div id="devops" class="module-section" style="display: none;">
+                        <h2>DevOps</h2>
+                        <p>DevOps combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle.</p>
+                        
+                        <h3>Key DevOps Tools</h3>
+                        <ul>
+                            <li><strong>Git:</strong> Version control system</li>
+                            <li><strong>Docker:</strong> Containerization platform</li>
+                            <li><strong>Kubernetes:</strong> Container orchestration</li>
+                            <li><strong>CI/CD:</strong> Continuous Integration/Continuous Deployment</li>
+                        </ul>
+
+                        <h3>Docker Basics</h3>
+                        <div class="code-block">
+                            <code>
+# Build an image
+docker build -t my-app .
+
+# Run a container
+docker run -d -p 8080:80 my-app
+
+# List containers
+docker ps
+
+# View logs
+docker logs container_id
+
+# Stop container
+docker stop container_id
+                            </code>
+                        </div>
+
+                        <h3>Git Workflow</h3>
+                        <div class="code-block">
+                            <code>
+# Initialize repository
+git init
+
+# Add files
+git add .
+
+# Commit changes
+git commit -m "Initial commit"
+
+# Push to remote
+git push origin main
+
+# Create branch
+git checkout -b feature-branch
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BITA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Require authentication for this page
+        document.addEventListener('DOMContentLoaded', async () => {
+            const auth = await requireAuth();
+            if (!auth) return; // Redirect will happen in requireAuth
+        });
+    </script>
+    <script src="modules.js"></script>
+</body>
+</html>
+

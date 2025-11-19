@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>BITA - Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Hide protected navigation items by default (will be removed by JS) */
+        .nav-item:has(a[href="alumni.html"]),
+        .nav-item:has(a[href="members.html"]),
+        .nav-item:has(a[href="modules.html"]),
+        .nav-item:has(a[href="contact-admin.html"]) {
+            display: none !important;
+        }
+    </style>
+    <script>
+        // Remove protected navigation items immediately
+        (function() {
+            function removeProtectedNav() {
+                const navMenu = document.getElementById('navMenu');
+                if (navMenu) {
+                    // Remove all protected items
+                    const protectedHrefs = ['alumni.html', 'members.html', 'modules.html', 'contact-admin.html'];
+                    protectedHrefs.forEach(href => {
+                        const links = navMenu.querySelectorAll('a[href="' + href + '"]');
+                        links.forEach(link => {
+                            const item = link.closest('.nav-item');
+                            if (item) {
+                                item.remove();
+                            }
+                        });
+                    });
+                }
+            }
+            
+            // Use MutationObserver to watch for navMenu creation
+            const observer = new MutationObserver(function(mutations) {
+                const navMenu = document.getElementById('navMenu');
+                if (navMenu) {
+                    removeProtectedNav();
+                    observer.disconnect();
+                }
+            });
+            
+            // Start observing
+            if (document.body) {
+                observer.observe(document.body, { childList: true, subtree: true });
+            }
+            
+            // Try immediately
+            removeProtectedNav();
+            
+            // Also try on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', removeProtectedNav);
+            } else {
+                setTimeout(removeProtectedNav, 0);
+            }
+            
+            // Multiple fallbacks
+            setTimeout(removeProtectedNav, 50);
+            setTimeout(removeProtectedNav, 100);
+            setTimeout(removeProtectedNav, 200);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">BITA</a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="alumni.html" class="nav-link">Alumni</a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link">BITA Members</a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html" class="nav-link">Modules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn-register active">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Steps -->
+    <div class="page-content">
+        <div class="container">
+            <h1 class="page-title">Register for BITA</h1>
+
+            <!-- Registration Form -->
+            <div class="form-container">
+                <h2>Create Your Account</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-light);">
+                    Please fill in your information and upload a photo of your matric card. 
+                    Your registration will be reviewed by admin before approval.
+                </p>
+
+                <form id="registerForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="matric">Matric Number</label>
+                        <input type="text" id="matric" name="matric" placeholder="e.g. B032410770" required>
+                        <div class="error-message" id="matricError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="program">Program</label>
+                        <select id="program" name="program" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; font-family: inherit;">
+                            <option value="BITA">BITA - Bachelor of Technology (Cloud Computing and Application)</option>
+                        </select>
+                        <div class="error-message" id="programError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your.name@student.utem.edu.my" required>
+                        <div class="error-message" id="emailError"></div>
+                        <small style="color: var(--text-light);">Must be a valid UTEM student email</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required minlength="8">
+                        <div class="error-message" id="passwordError"></div>
+                        <small style="color: var(--text-light);">Must be at least 8 characters</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <div class="error-message" id="confirmPasswordError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="matricCard">Upload Matric Card Photo</label>
+                        <div class="upload-area" style="min-height: 200px; padding: 2rem; cursor: pointer;" onclick="document.getElementById('matricCard').click();">
+                            <div class="upload-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <div class="upload-icon" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <p style="color: var(--text-color); margin: 0.5rem 0; font-weight: 500;">Click to upload or drag and drop</p>
+                                <p style="color: var(--text-light); font-size: 0.875rem; margin: 0;">PNG, JPG, JPEG up to 5MB</p>
+                                <input type="file" id="matricCard" name="matricCard" accept="image/*" style="display: none;" required>
+                            </div>
+                        </div>
+                        <div id="filePreview" style="margin-top: 1rem; display: none;">
+                            <img id="previewImage" class="preview-image" alt="Matric card preview" style="max-width: 100%; max-height: 300px; border-radius: 5px;">
+                            <button type="button" class="btn btn-secondary" id="removeFile" style="margin-top: 0.5rem; display: inline-block !important; padding: 0.5rem 1rem !important; border: 2px solid #2563eb !important; border-radius: 5px !important; color: #2563eb !important; background-color: transparent !important; opacity: 1 !important; visibility: visible !important; cursor: pointer !important;">Remove</button>
+                        </div>
+                        <div class="error-message" id="fileError"></div>
+                        <small style="color: var(--text-light);">Upload a clear photo of your matric card for admin verification</small>
+                    </div>
+
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button type="submit" class="btn btn-primary btn-large" style="display: inline-block !important; padding: 1rem 2.5rem !important; border: none !important; border-radius: 5px !important; color: #2563eb !important; text-decoration: none !important; font-weight: 600 !important; background-color: white !important; opacity: 1 !important; visibility: visible !important; cursor: pointer !important; line-height: normal !important; font-size: 1.1rem !important;">
+                            <i class="fas fa-user-plus" style="margin-right: 0.5rem;"></i>Register
+                        </button>
+                    </div>
+                </form>
+
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                <div id="successMessage" class="success-message" style="display: none;"></div>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successContainer" class="form-container" style="display: none; text-align: center;">
+                <div style="font-size: 4rem; color: var(--success-color); margin-bottom: 1rem;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 style="color: var(--success-color); margin-bottom: 1rem;">Registration Submitted!</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-color);">
+                    Thank you for registering, <span id="studentName"></span>!
+                </p>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">
+                    Your registration is pending admin approval. You will receive an email notification once your account is approved.
+                </p>
+                <a href="index.html" class="btn btn-primary btn-large" style="display: inline-block !important; padding: 1rem 2.5rem !important; border: none !important; border-radius: 5px !important; color: #2563eb !important; text-decoration: none !important; font-weight: 600 !important; background-color: white !important; opacity: 1 !important; visibility: visible !important; cursor: pointer !important; line-height: normal !important; font-size: 1.1rem !important;">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BITA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script src="register.js"></script>
+</body>
+</html>
+

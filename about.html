@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITA - About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Remove protected navigation items immediately (before page render)
+        (function() {
+            function removeProtectedNav() {
+                const navMenu = document.getElementById('navMenu');
+                if (navMenu) {
+                    const protected = ['alumni.html', 'members.html', 'modules.html', 'contact-admin.html'];
+                    protected.forEach(href => {
+                        const link = navMenu.querySelector('a[href="' + href + '"]');
+                        if (link) {
+                            const item = link.closest('.nav-item');
+                            if (item) item.remove(); // Remove completely from DOM
+                        }
+                    });
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', removeProtectedNav);
+            } else {
+                removeProtectedNav();
+            }
+        })();
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">BITA</a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="alumni.html" class="nav-link">Alumni</a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link">BITA Members</a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html" class="nav-link">Modules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link active">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn-register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
+            <h1 class="page-title">About BITA</h1>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <section style="margin-bottom: 3rem;">
+                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Our Mission</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-color);">
+                        BITA (Bachelor of Information Technology in Application) is dedicated to providing 
+                        students with comprehensive knowledge and skills in cloud computing, software development, 
+                        and modern IT practices. We aim to bridge the gap between academic learning and industry 
+                        requirements, preparing students for successful careers in technology.
+                    </p>
+                </section>
+
+                <section style="margin-bottom: 3rem;">
+                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">What We Offer</h2>
+                    <div class="features-grid" style="grid-template-columns: 1fr;">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Quality Education</h3>
+                            <p>Comprehensive curriculum covering cloud computing fundamentals, services, Linux, networking, and DevOps.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3>Alumni Network</h3>
+                            <p>Connect with graduates who are making their mark in the tech industry worldwide.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Hands-On Learning</h3>
+                            <p>Practical modules and tutorials with real-world examples and code snippets.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Secure Platform</h3>
+                            <p>Verified registration system ensuring only BITA students can access our resources.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section style="margin-bottom: 3rem;">
+                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Registration System</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-color);">
+                        Our registration system uses advanced OCR technology to verify student identity through 
+                        matriculation cards. This ensures that only legitimate BITA students can register and 
+                        access our platform. If you encounter any issues during registration, our admin team 
+                        is available to assist with manual verification.
+                    </p>
+                </section>
+
+                <section style="text-align: center; padding: 2rem; background-color: var(--bg-light); border-radius: 10px;">
+                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Get Started</h2>
+                    <p style="margin-bottom: 2rem; color: var(--text-color);">
+                        Ready to join the BITA community? Register now and start your journey!
+                    </p>
+                    <a href="register.html" class="btn btn-primary btn-large">Register Now</a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BITA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

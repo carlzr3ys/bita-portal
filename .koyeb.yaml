@@ -1,0 +1,17 @@
+# Koyeb Configuration for BITA Website
+# This file configures the PHP backend deployment
+
+type: web
+
+build:
+  command: ""
+  
+run:
+  command: "php -S 0.0.0.0:8000 -t ."
+  ports:
+    - 8000
+
+environment:
+  - name: PHP_VERSION
+    value: "8.2"
+
