@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { getApiUrl } from '../utils/api'
 
 function Alumni() {
   const { isAuthenticated } = useAuth()
@@ -18,7 +19,7 @@ function Alumni() {
 
   const loadAlumni = async () => {
     try {
-      const response = await fetch('/api/get_alumni.php', {
+      const response = await fetch(getApiUrl('/api/get_alumni.php'), {
         credentials: 'include'
       })
       const result = await response.json()

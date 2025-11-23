@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { AdminProvider } from './context/AdminContext'
+import { LecturerProvider } from './context/LecturerContext'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -13,16 +14,19 @@ import Members from './pages/Members'
 import UserProfile from './pages/UserProfile'
 import Modules from './pages/Modules'
 import ContactAdmin from './pages/ContactAdmin'
+import UpdateLog from './pages/UpdateLog'
 import AdminDashboard from './pages/admin/AdminDashboard'
+import LecturerDashboard from './pages/lecturer/LecturerDashboard'
 import Footer from './components/Footer'
 
 function AppContent() {
   const location = useLocation()
   const isAdminPage = location.pathname.startsWith('/admin')
+  const isLecturerPage = location.pathname.startsWith('/lecturer')
 
   return (
     <div className="App">
-      {!isAdminPage && <Navbar />}
+      {!isAdminPage && !isLecturerPage && <Navbar />}
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -34,11 +38,13 @@ function AppContent() {
           <Route path="/members" element={<Members />} />
           <Route path="/profile/:id" element={<UserProfile />} />
           <Route path="/modules" element={<Modules />} />
+          <Route path="/update-log" element={<UpdateLog />} />
           <Route path="/contact-admin" element={<ContactAdmin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/lecturer/dashboard" element={<LecturerDashboard />} />
         </Routes>
       </main>
-      {!isAdminPage && <Footer />}
+      {!isAdminPage && !isLecturerPage && <Footer />}
     </div>
   )
 }
@@ -48,9 +54,11 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <AdminProvider>
-          <Router>
-            <AppContent />
-          </Router>
+          <LecturerProvider>
+            <Router>
+              <AppContent />
+            </Router>
+          </LecturerProvider>
         </AdminProvider>
       </AuthProvider>
     </ThemeProvider>

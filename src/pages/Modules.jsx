@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useAdmin } from '../context/AdminContext'
+import { getApiUrl } from '../utils/api'
 
 function Modules() {
   const { isAuthenticated, user } = useAuth()
@@ -43,7 +44,7 @@ function Modules() {
 
   const loadCategories = async () => {
     try {
-      const response = await fetch('/api/get_categories.php', {
+      const response = await fetch(getApiUrl('/api/get_categories.php'), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -62,7 +63,7 @@ function Modules() {
   const loadFiles = async (weekId) => {
     setLoadingFiles(true)
     try {
-      const response = await fetch(`/api/get_week_files.php?week_id=${weekId}`, {
+      const response = await fetch(getApiUrl(`/api/get_week_files.php?week_id=${weekId}`), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -80,7 +81,7 @@ function Modules() {
     setLoadingMyUploads(true)
     try {
       console.log('Loading my uploads...')
-      const response = await fetch('/api/get_my_uploads.php', {
+      const response = await fetch(getApiUrl('/api/get_my_uploads.php'), {
         credentials: 'include'
       })
       console.log('My uploads response status:', response.status)
@@ -169,7 +170,7 @@ function Modules() {
         description: uploadFormData.description
       })
 
-      const response = await fetch('/api/upload_module_file.php', {
+      const response = await fetch(getApiUrl('/api/upload_module_file.php'), {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -230,7 +231,7 @@ function Modules() {
     if (!confirm(`Are you sure you want to delete "${cleanFileName(file.file_name)}"?`)) return
 
     try {
-      const response = await fetch(`/api/delete_module_file.php?id=${file.id}`, {
+      const response = await fetch(getApiUrl(`/api/delete_module_file.php?id=${file.id}`), {
         method: 'DELETE',
         credentials: 'include'
       })
@@ -260,7 +261,7 @@ function Modules() {
     if (!isAdmin) return
 
     try {
-      const response = await fetch('/api/toggle_pin_file.php', {
+      const response = await fetch(getApiUrl('/api/toggle_pin_file.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -326,7 +327,7 @@ function Modules() {
         visibility: editFormData.visibility
       })
 
-      const response = await fetch('/api/update_module_file.php', {
+      const response = await fetch(getApiUrl('/api/update_module_file.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -511,7 +512,7 @@ function Modules() {
   // Fetch category by ID from API (fallback if not in tree)
   const fetchCategoryById = async (categoryId) => {
     try {
-      const response = await fetch(`/api/get_category_by_id.php?id=${categoryId}`, {
+      const response = await fetch(getApiUrl(`/api/get_category_by_id.php?id=${categoryId}`), {
         credentials: 'include'
       })
       const result = await response.json()

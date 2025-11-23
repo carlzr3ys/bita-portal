@@ -1,174 +1,104 @@
-# BITA Website
+# BITA Portal API - Node.js Backend
 
-A comprehensive platform for BITA (Bachelor of Information Technology in Application) students and alumni.
+Backend API untuk BITA Portal yang dikonversi dari PHP ke Node.js.
 
-## Features
+## Setup
 
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- **Secure Registration**: OCR-based verification using matriculation cards
-- **Alumni Network**: Connect with graduated BITA students
-- **Member Directory**: View current BITA students
-- **Learning Modules**: Comprehensive Cloud Computing tutorials
-- **Modern UI**: Clean, professional design with intuitive navigation
-
-## Registration Flow
-
-1. **Upload Matric Card**: Student uploads or takes a photo of their matriculation card
-2. **OCR Detection**: System uses Tesseract.js to extract information (name, matric number, program)
-3. **Verification**: System verifies that the student is enrolled in BITA program
-4. **Confirmation**: Student reviews and edits detected information if needed
-5. **Account Creation**: Student creates account with email and password
-6. **Success**: Welcome message and access to dashboard
-
-## Technology Stack
-
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **OCR**: Tesseract.js for client-side text recognition
-- **Storage**: localStorage (for demo - replace with Firebase/Supabase in production)
-- **Icons**: Font Awesome 6.4.0
-
-## Setup Instructions
-
-### Prerequisites
-
-- Node.js and npm installed
-- XAMPP (Apache dan MySQL) - untuk backend PHP dan database
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-
-### Installation
-
-1. **Install Node.js dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Start XAMPP:**
-   - Buka XAMPP Control Panel
-   - Start **Apache** dan **MySQL**
-   - Pastikan Apache running di `http://localhost`
-   - Pastikan MySQL running
-
-3. **Check XAMPP status (optional):**
-   ```bash
-   npm run check-xampp
-   ```
-
-4. **Start development server:**
-   ```bash
-   npm start
-   ```
-
-5. **Browser akan auto-open di:** `http://localhost:8080`
-
-### Development Server
-
-Development server ini akan:
-- ✅ Serve frontend files (HTML/CSS/JS) di port 8080
-- ✅ Proxy API calls ke XAMPP Apache (port 80)
-- ✅ Auto-open browser bila start
-
-**Important:** Pastikan XAMPP Apache dan MySQL running sebelum start npm server!
-
-### Alternative Setup (Without Node.js)
-
-Simply open `index.html` in a modern web browser. Note that some features may require a local server due to CORS restrictions.
-
-## Project Structure
-
-```
-BITA/
-├── index.html              # Home page
-├── register.html           # Registration flow
-├── alumni.html             # Alumni directory
-├── members.html            # Current members
-├── modules.html            # Learning modules
-├── about.html              # About page
-├── contact-admin.html      # Contact admin form
-├── dashboard.html          # User dashboard
-├── styles.css              # Main stylesheet
-├── script.js               # Main navigation script
-├── register.js             # Registration logic & OCR
-├── alumni.js               # Alumni data loading
-├── members.js              # Members data loading
-├── modules.js              # Module navigation
-├── contact-admin.js        # Contact form handler
-├── dashboard.js            # Dashboard logic
-├── package.json            # Dependencies
-└── README.md               # This file
+1. Install dependencies:
+```bash
+npm install
 ```
 
-## Key Features Explained
+2. Copy `.env.example` ke `.env` dan sesuaikan konfigurasi:
+```bash
+cp .env.example .env
+```
 
-### OCR Registration
+3. Edit file `.env` dengan konfigurasi database dan lainnya sesuai kebutuhan.
 
-The registration system uses Tesseract.js to extract text from matriculation card images. The system:
-- Detects name, matric number, and program
-- Validates that the program is BITA
-- Allows manual editing if OCR misreads information
-- Blocks non-BITA students automatically
+4. Jalankan server:
+```bash
+npm start
+```
 
-### Responsive Navigation
+Untuk development dengan auto-reload:
+```bash
+npm run dev
+```
 
-- Desktop: Full horizontal navigation bar
-- Mobile: Hamburger menu that expands to show all links
-- All pages accessible on small screens
+## API Endpoints
 
-### Modules Page
+### Authentication
+- `POST /api/auth/login` - User login
+- `POST /api/auth/admin/login` - Admin login
+- `POST /api/auth/lecturer/login` - Lecturer login
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/logout` - User logout
+- `POST /api/auth/admin/logout` - Admin logout
+- `POST /api/auth/lecturer/logout` - Lecturer logout
+- `GET /api/auth/check-session` - Check user session
+- `GET /api/auth/check-admin-session` - Check admin session
+- `GET /api/auth/check-lecturer-session` - Check lecturer session
 
-- Desktop: Sidebar navigation with content area
-- Mobile: Collapsible sidebar menu
-- W3Schools-style code blocks and examples
-- Topics: Cloud Computing Fundamentals, Services, Linux, Networking, DevOps
+### Users
+- `GET /api/users/all` - Get all users (admin only)
+- `GET /api/users/pending` - Get pending users (admin only)
+- `GET /api/users/:id` - Get user by ID
+- `GET /api/users/profile/:id` - Get user profile
+- `POST /api/users/update-profile` - Update user profile
+- `POST /api/users/approve` - Approve user (admin only)
+- `POST /api/users/reject` - Reject user (admin only)
+- `DELETE /api/users/:id` - Delete user (admin only)
+- `GET /api/users/members/all` - Get all members
+- `GET /api/users/alumni/all` - Get all alumni
 
-## Production Deployment
+### Admin
+- `GET /api/admin/all` - Get all admins (superadmin only)
+- `POST /api/admin/save` - Create/update admin (superadmin only)
+- `DELETE /api/admin/:id` - Delete admin (superadmin only)
+- `GET /api/admin/logs` - Get admin logs
 
-For production deployment, you should:
+### Modules
+- `GET /api/modules/all` - Get all modules (legacy)
+- `GET /api/modules/files/all` - Get all module files (admin only)
+- `GET /api/modules/files/week/:weekId` - Get week files
+- `POST /api/modules/files/upload` - Upload module file
+- `POST /api/modules/files/update` - Update module file
+- `DELETE /api/modules/files/:id` - Delete module file
+- `POST /api/modules/files/toggle-pin` - Toggle pin file (admin only)
+- `GET /api/modules/files/my-uploads` - Get my uploads
 
-1. **Replace localStorage with a backend**:
-   - Set up Firebase Authentication
-   - Use Firestore for user data storage
-   - Implement proper user management
+### Categories
+- `GET /api/categories/all` - Get all categories
+- `GET /api/categories/:id` - Get category by ID
+- `POST /api/categories/create` - Create category (admin only)
+- `POST /api/categories/update` - Update category (admin only)
+- `DELETE /api/categories/:id` - Delete category (admin only)
 
-2. **Enhance OCR**:
-   - Consider using Google Cloud Vision API for better accuracy
-   - Add server-side validation
-   - Implement image preprocessing
+### Messages
+- `GET /api/messages/conversations` - Get conversations (admin only)
+- `GET /api/messages/requests` - Get message requests (admin only)
+- `POST /api/messages/accept-request` - Accept message request (admin only)
+- `POST /api/messages/send` - Send message (admin only)
+- `GET /api/messages/:conversationId` - Get messages for conversation
 
-3. **Add Authentication**:
-   - Implement login/logout functionality
-   - Add session management
-   - Secure API endpoints
+### Contact
+- `POST /api/contact/contact` - Contact admin (user only)
+- `GET /api/contact/requests` - Get contact requests (admin only)
+- `POST /api/contact/resolve` - Resolve contact request (admin only)
+- `POST /api/contact/undo-resolve` - Undo resolve contact request (admin only)
+- `DELETE /api/contact/:id` - Delete contact request (admin only)
 
-4. **Database Integration**:
-   - Store alumni and member data in a database
-   - Implement admin panel for data management
-   - Add search and filter functionality
+### Stats
+- `GET /api/stats/admin` - Get admin stats
 
-5. **Security**:
-   - Implement proper password hashing
-   - Add CSRF protection
-   - Secure API endpoints
-   - Validate all user inputs
+## Environment Variables
 
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+Lihat `.env.example` untuk daftar lengkap environment variables yang diperlukan.
 
 ## Notes
 
-- The current implementation uses localStorage for demo purposes
-- OCR accuracy depends on image quality and card format
-- For production, integrate with a proper backend and database
-- Admin requests are stored in localStorage (replace with backend in production)
-
-## License
-
-MIT License - feel free to use and modify as needed.
-
-## Support
-
-For issues or questions, please contact the BITA admin team through the Contact Admin page.
-
+- Semua endpoint menggunakan session-based authentication
+- File uploads disimpan di folder `uploads/` (dapat dikonfigurasi via `UPLOAD_DIR`)
+- Database menggunakan MySQL/MariaDB
+- Session menggunakan express-session dengan cookie-based storage

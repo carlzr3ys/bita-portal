@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAdmin } from '../../context/AdminContext'
 import { useTheme } from '../../context/ThemeContext'
-import { getUploadsUrl } from '../../utils/api'
+import { getApiUrl, getUploadsUrl } from '../../utils/api'
 import AdminUserProblems from '../../components/admin/AdminUserProblems'
 
 function AdminDashboard() {
@@ -79,7 +79,7 @@ function AdminDashboard() {
   const loadData = async () => {
     try {
       // Load stats
-      const statsResponse = await fetch('/api/get_admin_stats.php', {
+      const statsResponse = await fetch(getApiUrl('/api/get_admin_stats.php'), {
         credentials: 'include'
       })
       const statsResult = await statsResponse.json()
@@ -91,7 +91,7 @@ function AdminDashboard() {
       }
 
       // Load pending users
-      const pendingResponse = await fetch('/api/get_pending_users.php', {
+      const pendingResponse = await fetch(getApiUrl('/api/get_pending_users.php'), {
         credentials: 'include'
       })
       const pendingResult = await pendingResponse.json()
@@ -100,7 +100,7 @@ function AdminDashboard() {
       }
 
       // Load all users
-      const allUsersResponse = await fetch('/api/get_all_users.php', {
+      const allUsersResponse = await fetch(getApiUrl('/api/get_all_users.php'), {
         credentials: 'include'
       })
       const allUsersResult = await allUsersResponse.json()
@@ -110,7 +110,7 @@ function AdminDashboard() {
 
       // Load admins (superadmin only)
       if (isSuperAdmin) {
-        const adminsResponse = await fetch('/api/get_admins.php', {
+        const adminsResponse = await fetch(getApiUrl('/api/get_admins.php'), {
           credentials: 'include'
         })
         const adminsResult = await adminsResponse.json()
@@ -119,7 +119,7 @@ function AdminDashboard() {
         }
 
         // Load admin logs
-        const logsResponse = await fetch('/api/get_admin_logs.php', {
+        const logsResponse = await fetch(getApiUrl('/api/get_admin_logs.php'), {
           credentials: 'include'
         })
         const logsResult = await logsResponse.json()
@@ -129,7 +129,7 @@ function AdminDashboard() {
       }
 
       // Load categories
-      const categoriesResponse = await fetch('/api/get_categories.php', {
+      const categoriesResponse = await fetch(getApiUrl('/api/get_categories.php'), {
         credentials: 'include'
       })
       const categoriesResult = await categoriesResponse.json()
@@ -148,7 +148,7 @@ function AdminDashboard() {
     setLoadingAllFiles(true)
     try {
       console.log('Loading all module files...')
-      const response = await fetch('/api/get_all_module_files.php', {
+      const response = await fetch(getApiUrl('/api/get_all_module_files.php'), {
         credentials: 'include'
       })
       console.log('All files response status:', response.status)
@@ -182,7 +182,7 @@ function AdminDashboard() {
     if (!confirm('Are you sure you want to approve this user?')) return
 
     try {
-      const response = await fetch('/api/approve_user.php', {
+      const response = await fetch(getApiUrl('/api/approve_user.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -213,7 +213,7 @@ function AdminDashboard() {
     if (reason === null) return // User cancelled
 
     try {
-      const response = await fetch('/api/reject_user.php', {
+      const response = await fetch(getApiUrl('/api/reject_user.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -272,7 +272,7 @@ function AdminDashboard() {
   const handleEditUser = async (user) => {
     // Fetch full user data including profile fields
     try {
-      const response = await fetch(`/api/get_user_by_id.php?id=${user.id}`, {
+      const response = await fetch(getApiUrl(`/api/get_user_by_id.php?id=${user.id}`), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -378,7 +378,7 @@ function AdminDashboard() {
           updateData.password = userForm.password
         }
 
-        const response = await fetch('/api/update_user.php', {
+        const response = await fetch(getApiUrl('/api/update_user.php'), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -397,7 +397,7 @@ function AdminDashboard() {
         }
       } else {
         // Add new user
-        const response = await fetch('/api/add_user.php', {
+        const response = await fetch(getApiUrl('/api/add_user.php'), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -428,7 +428,7 @@ function AdminDashboard() {
     if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) return
 
     try {
-      const response = await fetch('/api/delete_user.php', {
+      const response = await fetch(getApiUrl('/api/delete_user.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -476,7 +476,7 @@ function AdminDashboard() {
     e.preventDefault()
 
     try {
-      const response = await fetch('/api/save_admin.php', {
+      const response = await fetch(getApiUrl('/api/save_admin.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -507,7 +507,7 @@ function AdminDashboard() {
     if (!confirm('Are you sure you want to delete this admin? This action cannot be undone.')) return
 
     try {
-      const response = await fetch('/api/delete_admin.php', {
+      const response = await fetch(getApiUrl('/api/delete_admin.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -531,7 +531,7 @@ function AdminDashboard() {
 
   const handleDeleteFile = async (fileId) => {
     try {
-      const response = await fetch(`/api/delete_module_file.php?id=${fileId}`, {
+      const response = await fetch(getApiUrl(`/api/delete_module_file.php?id=${fileId}`), {
         method: 'DELETE',
         credentials: 'include'
       })
@@ -1682,7 +1682,7 @@ function CategoryManagement({ categories, categoryTree, onRefresh }) {
     if (!confirm(`Are you sure you want to delete "${category.name}"? ${category.level < 5 ? 'This will also delete all child categories.' : ''}`)) return
 
     try {
-      const response = await fetch(`/api/delete_category.php?id=${category.id}`, {
+      const response = await fetch(getApiUrl(`/api/delete_category.php?id=${category.id}`), {
         method: 'DELETE',
         credentials: 'include'
       })
@@ -1708,7 +1708,7 @@ function CategoryManagement({ categories, categoryTree, onRefresh }) {
   const loadFiles = async (weekId) => {
     setLoadingFiles(true)
     try {
-      const response = await fetch(`/api/get_week_files.php?week_id=${weekId}`, {
+      const response = await fetch(getApiUrl(`/api/get_week_files.php?week_id=${weekId}`), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -1728,7 +1728,7 @@ function CategoryManagement({ categories, categoryTree, onRefresh }) {
     formData.append('week_id', selectedWeek.id)
     
     try {
-      const response = await fetch('/api/upload_module_file.php', {
+      const response = await fetch(getApiUrl('/api/upload_module_file.php'), {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -1752,7 +1752,7 @@ function CategoryManagement({ categories, categoryTree, onRefresh }) {
     if (!confirm(`Are you sure you want to delete "${file.file_name}"?`)) return
 
     try {
-      const response = await fetch(`/api/delete_module_file.php?id=${file.id}`, {
+      const response = await fetch(getApiUrl(`/api/delete_module_file.php?id=${file.id}`), {
         method: 'DELETE',
         credentials: 'include'
       })

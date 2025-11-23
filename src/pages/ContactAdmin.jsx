@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { getApiUrl } from '../utils/api'
 
 function ContactAdmin() {
   const { isAuthenticated, user } = useAuth()
@@ -25,7 +26,7 @@ function ContactAdmin() {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('/api/get_user.php', {
+      const response = await fetch(getApiUrl('/api/get_user.php'), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -66,7 +67,7 @@ function ContactAdmin() {
     console.log('User data:', userData)
 
     try {
-      const response = await fetch('/api/contact_admin.php', {
+      const response = await fetch(getApiUrl('/api/contact_admin.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

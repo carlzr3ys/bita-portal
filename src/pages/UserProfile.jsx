@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { getApiUrl } from '../utils/api'
 
 function UserProfile() {
   const { id } = useParams()
@@ -27,7 +28,7 @@ function UserProfile() {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch(`/api/get_user_profile.php?id=${id}`, {
+      const response = await fetch(getApiUrl(`/api/get_user_profile.php?id=${id}`), {
         credentials: 'include'
       })
       const result = await response.json()

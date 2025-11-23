@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { getApiUrl } from '../utils/api'
 
 function Members() {
   const { isAuthenticated } = useAuth()
@@ -21,7 +22,7 @@ function Members() {
 
   const loadMembers = async () => {
     try {
-      const response = await fetch('/api/get_members.php', {
+      const response = await fetch(getApiUrl('/api/get_members.php'), {
         credentials: 'include'
       })
       const result = await response.json()

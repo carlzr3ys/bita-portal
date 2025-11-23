@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getApiUrl } from '../../utils/api'
 
 function AdminUserProblems() {
   const [allProblems, setAllProblems] = useState([])
@@ -27,8 +28,8 @@ function AdminUserProblems() {
     try {
       // Load both pending and resolved
       const [pendingRes, resolvedRes] = await Promise.all([
-        fetch('/api/get_admin_contact_requests.php?status=Pending', { credentials: 'include' }),
-        fetch('/api/get_admin_contact_requests.php?status=Resolved', { credentials: 'include' })
+        fetch(getApiUrl('/api/get_admin_contact_requests.php?status=Pending'), { credentials: 'include' }),
+        fetch(getApiUrl('/api/get_admin_contact_requests.php?status=Resolved'), { credentials: 'include' })
       ])
 
       console.log('Pending response status:', pendingRes.status)
@@ -69,7 +70,7 @@ function AdminUserProblems() {
     setLoading(true)
     try {
       const status = activeView === 'pending' ? 'Pending' : 'Resolved'
-      const response = await fetch(`/api/get_admin_contact_requests.php?status=${status}`, {
+      const response = await fetch(getApiUrl(`/api/get_admin_contact_requests.php?status=${status}`), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -100,7 +101,7 @@ function AdminUserProblems() {
     try {
       console.log('Resolving problem ID:', problemId)
       
-      const response = await fetch('/api/resolve_contact_request.php', {
+      const response = await fetch(getApiUrl('/api/resolve_contact_request.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -138,7 +139,7 @@ function AdminUserProblems() {
     try {
       console.log('Undoing resolve for problem ID:', problemId)
       
-      const response = await fetch('/api/undo_resolve_contact_request.php', {
+      const response = await fetch(getApiUrl('/api/undo_resolve_contact_request.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -176,7 +177,7 @@ function AdminUserProblems() {
     try {
       console.log('Deleting problem ID:', problemId)
       
-      const response = await fetch('/api/delete_contact_request.php', {
+      const response = await fetch(getApiUrl('/api/delete_contact_request.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

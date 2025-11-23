@@ -1,9 +1,0 @@
-{
-  "name": "bita/website",
-  "description": "BITA Website - PHP + MySQL Backend",
-  "type": "project",
-  "require": {
-    "phpmailer/phpmailer": "^7.0"
-  },
-  "autoload": {}
-}

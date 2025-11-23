@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { getApiUrl } from '../utils/api'
 
 function Dashboard() {
   const { isAuthenticated, user } = useAuth()
@@ -35,7 +36,7 @@ function Dashboard() {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('/api/get_user.php', {
+      const response = await fetch(getApiUrl('/api/get_user.php'), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -97,7 +98,7 @@ function Dashboard() {
     setSaving(true)
 
     try {
-      const response = await fetch('/api/update_profile.php', {
+      const response = await fetch(getApiUrl('/api/update_profile.php'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

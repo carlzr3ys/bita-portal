@@ -81,6 +81,11 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link to="/update-log" className={`nav-link ${isActive('/update-log')}`} onClick={() => setIsOpen(false)}>
+                  <i className="fas fa-history" style={{ marginRight: '0.75rem', width: '20px', textAlign: 'center' }}></i>Update Log
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/register" className="nav-link btn-register" onClick={() => setIsOpen(false)}>
                   <i className="fas fa-user-plus" style={{ marginRight: '0.75rem', width: '20px', textAlign: 'center' }}></i>Register
                 </Link>
@@ -106,6 +111,11 @@ function Navbar() {
               <li className="nav-item">
                 <Link to="/modules" className={`nav-link ${isActive('/modules')}`} onClick={() => setIsOpen(false)}>
                   <i className="fas fa-book" style={{ marginRight: '0.75rem', width: '20px', textAlign: 'center' }}></i>Modules
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/update-log" className={`nav-link ${isActive('/update-log')}`} onClick={() => setIsOpen(false)}>
+                  <i className="fas fa-history" style={{ marginRight: '0.75rem', width: '20px', textAlign: 'center' }}></i>Update Log
                 </Link>
               </li>
               <li className="nav-item">

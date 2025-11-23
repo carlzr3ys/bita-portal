@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { getApiUrl } from '../utils/api'
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -150,7 +151,7 @@ function Register() {
       submitData.append('password', formData.password)
       submitData.append('matricCard', matricCard)
 
-      const response = await fetch('/api/register.php', {
+      const response = await fetch(getApiUrl('/api/register.php'), {
         method: 'POST',
         credentials: 'include',
         body: submitData

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import { getApiUrl } from '../utils/api'
 
 const AdminContext = createContext()
 
@@ -13,7 +14,7 @@ export function AdminProvider({ children }) {
 
   const checkAdminAuth = async () => {
     try {
-      const response = await fetch('/api/check_admin_session.php', {
+      const response = await fetch(getApiUrl('/api/check_admin_session.php'), {
         credentials: 'include'
       })
       const result = await response.json()
@@ -35,8 +36,11 @@ export function AdminProvider({ children }) {
   }
 
   const adminLogin = async (email, password) => {
+    const apiUrl = getApiUrl('/api/admin_login.php')
+    console.log('🌐 [ADMIN] Attempting admin login to:', apiUrl)
+    
     try {
-      const response = await fetch('/api/admin_login.php', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -45,24 +49,57 @@ export function AdminProvider({ children }) {
         body: JSON.stringify({ email, password })
       })
       
+      console.log('📡 [ADMIN] Admin login response status:', response.status, response.statusText)
+      
+      const contentType = response.headers.get('content-type')
+      if (!contentType || !contentType.includes('application/json')) {
+        const textResponse = await response.text()
+        console.error('❌ [ADMIN] Non-JSON response:', textResponse.substring(0, 200))
+        
+        if (textResponse.includes('MySQL Connection failed') || textResponse.includes('Database connection')) {
+          console.error('🗄️ [ADMIN] Database connection error detected!')
+          return { success: false, message: 'Database connection error. Please contact administrator.' }
+        }
+        
+        return { success: false, message: 'Backend server error. Invalid response format.' }
+      }
+      
       const result = await response.json()
+      console.log('📦 [ADMIN] Admin login response:', result)
       
       if (result.success) {
+        console.log('✅ [ADMIN] Admin login successful')
         setIsAdmin(true)
         setAdmin(result.admin)
         return { success: true, isAdmin: true }
       } else {
+        console.warn('⚠️ [ADMIN] Admin login failed:', result.message)
+        
+        if (result.message && (result.message.includes('Database') || result.message.includes('database') || result.message.includes('MySQL'))) {
+          console.error('🗄️ [ADMIN] Database error detected!')
+        }
+        
         return { success: false, message: result.message }
       }
     } catch (error) {
-      console.error('Admin login error:', error)
+      console.error('❌ [ADMIN] Admin login error:', error)
+      console.error('❌ [ADMIN] Error details:', {
+        name: error.name,
+        message: error.message
+      })
+      
+      if (error.message && (error.message.includes('Failed to fetch') || error.message.includes('NetworkError'))) {
+        console.error('🌐 [ADMIN] Network/Backend connection error!')
+        return { success: false, message: 'Cannot connect to backend server. Please check your internet connection.' }
+      }
+      
       return { success: false, message: 'Admin login failed. Please try again.' }
     }
   }
 
   const adminLogout = async () => {
     try {
-      await fetch('/api/admin_logout.php', {
+      await fetch(getApiUrl('/api/admin_logout.php'), {
         credentials: 'include'
       })
       setIsAdmin(false)
