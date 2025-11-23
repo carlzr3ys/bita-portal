@@ -40,8 +40,5 @@ temp/
 
 # Secrets and credentials
 config/serviceAccountKey.json
-*.json
-!package.json
-!package-lock.json
-!tsconfig.json
-!vite.config.js
+**/serviceAccountKey.json
+*.key.json
